@@ -1,5 +1,5 @@
 import controller as c
-import models.LinkedList as LinkedList
+from models.LinkedList import LinkedList
 
 lista_paises = LinkedList()
 
@@ -9,52 +9,79 @@ def main():
         menu = sec_menu.split()
         if menu[0] == "RPI":
             pais_novo = menu[1]
-            pass
+            RPI(lista_paises, pais_novo)
         elif menu[0] == "RPF":
-            pass
+            pais_novo = menu[1]
+            RPF(lista_paises, pais_novo)
         elif menu[0] == "RPDE":
-            pass
+            pais_novo = menu[1]
+            pais_registado = menu[2]
+            RPDE(lista_paises, pais_novo, pais_registado)
         elif menu[0] == "RPAE":
-            pass
+            pais_novo = menu[1]
+            pais_registado = menu[2]
+            RPAE(lista_paises, pais_novo, pais_registado)
         elif menu[0] == "RPII":
-            pass
+            pais_novo = menu[1]
+            index = menu[2]
+            RPII(lista_paises, pais_novo, index)
         elif menu[0] == "VNE":
-            pass
+            print(f"O número de elementos são {VNE(lista_paises)}.")
         elif menu[0] == "VP":
-            pass
+            pais_nome = menu[1]
+            verificar = VP(lista_paises, pais_nome)
+            if verificar == True:
+                print(f"O país {pais_nome} encontra-se na lista.")
+            else:
+                print(f"O país {pais_nome} não se encontra na lista.")
         elif menu[0] == "EPE":
-            pass
+            print(f"O país {EPE(lista_paises)} foi eliminado da lista.")
         elif menu[0] == "EUE":
-            pass
+            print(f"O país {EUE(lista_paises)} foi eliminado da lista.")
         elif menu[0] == "EP":
-            pass
+            pais_escolhido = menu[1]
+            if EP(lista_paises, pais_escolhido) == True:
+                print(f"O país {pais_escolhido} foi eliminado da lista.")
+            else:
+                print(f"O país {pais_escolhido} não se encontra na lista.")
 
-def RPI():
-    pass
+def RPI(lista_paises, pais_novo):
+    if c.registar_pais_inicio(lista_paises, pais_novo):
+        return lista_paises.traverse_list()
 
-def RPF():
-    pass
+def RPF(lista_paises, pais_novo):
+    if c.registar_pais_fim(lista_paises, pais_novo):
+        return lista_paises.traverse_list()
 
-def RPDE():
-    pass
+def RPDE(lista_paises, pais_novo, pais_registado):
+    if c.registar_depois_registado(lista_paises, pais_novo, pais_registado):
+        return lista_paises.traverse_list()
 
-def RPAE():
-    pass
+def RPAE(lista_paises, pais_novo, pais_registado):
+    if c.registar_antes_registado(lista_paises, pais_novo, pais_registado):
+        return lista_paises.traverse_list()
 
-def RPII():
-    pass
+def RPII(lista_paises, pais_novo, index):
+    if c.registar_pais_index(lista_paises, pais_novo, index):
+        return lista_paises.traverse_list()
 
-def VNE():
-    pass
+def VNE(lista_paises):
+    return c.verificar_numero_elementos(lista_paises)
 
-def VP():
-    pass
+def VP(lista_paises, pais_nome):
+    if c.verificar_pais(lista_paises, pais_nome) == True:
+        return True
+    else:
+        return False
 
-def EPE():
-    pass
+def EPE(lista_paises):
+    return c.eliminar_primeiro_pais(lista_paises)
 
-def EUE():
-    pass
+def EUE(lista_paises):
+    return c.eliminar_ultimo_pais(lista_paises)
 
-def EP():
-    pass
+def EP(lista_paises, pais_escolhido):
+    if c.eliminar_pais_escolhido(lista_paises, pais_escolhido) == True:
+        return True
+    else:
+        return False
